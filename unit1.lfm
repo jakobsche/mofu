@@ -1,0 +1,100 @@
+object Form1: TForm1
+  Left = 532
+  Height = 282
+  Top = 226
+  Width = 394
+  HorzScrollBar.Page = 217
+  VertScrollBar.Page = 169
+  AutoScroll = True
+  Caption = 'Möbelrücken'
+  ClientHeight = 256
+  ClientWidth = 394
+  Menu = MainMenu1
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnMouseMove = FormMouseMove
+  Position = poDefault
+  LCLVersion = '1.8.4.0'
+  WindowState = wsMaximized
+  object PaintBox: TPaintBox
+    Left = 0
+    Height = 169
+    Top = 0
+    Width = 217
+    ParentColor = False
+    OnClick = PaintBoxClick
+    OnMouseMove = PaintBoxMouseMove
+    OnPaint = PaintBoxPaint
+  end
+  object MainMenu1: TMainMenu
+    left = 176
+    top = 192
+    object MenuItem2: TMenuItem
+      Caption = 'Datei'
+      object FileNew: TMenuItem
+        Caption = '&Neu'
+        OnClick = FileNewClick
+      end
+      object FileOpen: TMenuItem
+        Caption = 'Öffnen ...'
+        OnClick = FileOpenClick
+      end
+      object FileSave: TMenuItem
+        Caption = '&Speichern'
+        OnClick = FileSaveClick
+      end
+      object FileSaveAs: TMenuItem
+        Caption = 'Speichern unter'
+      end
+      object MenuItem7: TMenuItem
+        Caption = '-'
+      end
+      object FilePrint: TMenuItem
+        Caption = '&Drucken'
+        OnClick = FilePrintClick
+      end
+      object FilePrinterSetup: TMenuItem
+        Caption = 'D&rucker einrichten ...'
+        OnClick = FilePrinterSetupClick
+      end
+      object MenuItem10: TMenuItem
+        Caption = '-'
+      end
+      object FileExit: TMenuItem
+        Caption = 'Beenden'
+        OnClick = FileExitClick
+      end
+    end
+    object MenuItem1: TMenuItem
+      Caption = '&Zeichnen'
+      object AddConstrSquare: TMenuItem
+        Caption = 'Konstruktionspunkt &quadratisch'
+        OnClick = AddConstrSquareClick
+      end
+      object AddConstrCircleYellow: TMenuItem
+        Caption = 'Konstruktionspunkt &kreisförmig, gelb'
+        OnClick = AddConstrCircleYellowClick
+      end
+      object AddConstrCircleGreen: TMenuItem
+        Caption = 'Konstruktionspunkt kreisförmig, &grün'
+        OnClick = AddConstrCircleGreenClick
+      end
+    end
+  end
+  object SaveDialog: TSaveDialog
+    left = 328
+    top = 16
+  end
+  object OpenDialog: TOpenDialog
+    left = 307
+    top = 141
+  end
+  object PrintDialog: TPrintDialog
+    left = 240
+    top = 16
+  end
+  object PrinterSetupDialog: TPrinterSetupDialog
+    left = 264
+    top = 80
+  end
+end

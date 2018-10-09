@@ -23,8 +23,11 @@ object Form1: TForm1
     Width = 217
     ParentColor = False
     OnClick = PaintBoxClick
+    OnMouseDown = PaintBoxMouseDown
     OnMouseMove = PaintBoxMouseMove
+    OnMouseUp = PaintBoxMouseUp
     OnPaint = PaintBoxPaint
+    OnStartDrag = PaintBoxStartDrag
   end
   object MainMenu1: TMainMenu
     left = 176

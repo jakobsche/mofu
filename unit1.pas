@@ -47,9 +47,16 @@ type
     procedure AddConstrSquareClick(Sender: TObject);
     procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure PaintBoxClick(Sender: TObject);
+    procedure PaintBoxDragOver(Sender, Source: TObject; X, Y: Integer;
+      State: TDragState; var Accept: Boolean);
+    procedure PaintBoxMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure PaintBoxMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
+    procedure PaintBoxMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure PaintBoxPaint(Sender: TObject);
+    procedure PaintBoxStartDrag(Sender: TObject; var DragObject: TDragObject);
   private
   public
     Drawing: TDrawing2D;
@@ -78,6 +85,12 @@ var
   PB: TPaintBox absolute Sender;
 begin
   Drawing.Draw
+end;
+
+procedure TForm1.PaintBoxStartDrag(Sender: TObject; var DragObject: TDragObject
+  );
+begin
+  DragObject := TDragObject.AutoCreate(Sender as TControl);
 end;
 
 function TForm1.HasChanged: Boolean;
@@ -109,7 +122,8 @@ begin
     Drawing.SaveToFile(SaveDialog.FileName);
     FileName := SaveDialog.FileName;
     LastSaved := Drawing.LastModified;
-  end;
+  end
+  else ;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -161,7 +175,7 @@ begin
           CanClose := HasChanged
         end;
       mrNo: CanClose := True;
-      mrCancel:;
+      mrCancel: CanClose := False;
     end;
 end;
 
@@ -213,7 +227,24 @@ end;
 
 procedure TForm1.PaintBoxClick(Sender: TObject);
 begin
-  StickyElement := nil
+  if StickyElement <> nil then
+    if not StickyElement.Dragging then StickyElement := nil
+end;
+
+procedure TForm1.PaintBoxDragOver(Sender, Source: TObject; X, Y: Integer;
+  State: TDragState; var Accept: Boolean);
+begin
+
+end;
+
+procedure TForm1.PaintBoxMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if StickyElement <> nil then Exit;
+  if Button = mbLeft then begin
+    StickyElement := Drawing.GetElementAt(X, Y);
+    if StickyElement <> nil then StickyElement.Dragging := True
+  end;
 end;
 
 procedure TForm1.PaintBoxMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -224,15 +255,18 @@ begin
   if StickyElement <> nil then begin
     StickyElement.PixelsCenter := Point(X, Y);
     PaintBox.Refresh;
-    if X > PaintBox.ClientRect.Right - 8 then begin
-      PaintBox.Width := X + 8;
-      P := PaintBox.ClientToParent(Point(X, Y), Self);
-      if P.X > ClientWidth - 8 then ScrollBy(32, 0)
-    end;
-    if Y > PaintBox.ClientRect.Bottom - 8 then begin
-      PaintBox.Height := Y + 8
-    end;
   end;
+end;
+
+procedure TForm1.PaintBoxMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if StickyElement <> nil then
+    if StickyElement.Dragging then
+      if Button = mbLeft then begin
+        StickyElement.Dragging := False;
+        StickyElement := nil
+      end;
 end;
 
 end.

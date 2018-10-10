@@ -26,6 +26,7 @@ type
     AddConstrSquare: TMenuItem;
     AddConstrCircleYellow: TMenuItem;
     AddConstrCircleGreen: TMenuItem;
+    AddConstrFrame: TMenuItem;
     MenuItem7: TMenuItem;
     FilePrint: TMenuItem;
     FilePrinterSetup: TMenuItem;
@@ -36,6 +37,7 @@ type
     SaveDialog: TSaveDialog;
     procedure AddConstrCircleGreenClick(Sender: TObject);
     procedure AddConstrCircleYellowClick(Sender: TObject);
+    procedure AddConstrFrameClick(Sender: TObject);
     procedure FileExitClick(Sender: TObject);
     procedure FilePrintClick(Sender: TObject);
     procedure FilePrinterSetupClick(Sender: TObject);
@@ -151,6 +153,11 @@ procedure TForm1.AddConstrCircleYellowClick(Sender: TObject);
 begin
   StickyElement := Drawing.NewElement(TConstrCircle);
   (StickyElement as TConstrCircle).Color := clYellow;
+end;
+
+procedure TForm1.AddConstrFrameClick(Sender: TObject);
+begin
+  StickyElement := Drawing.NewElement(TConstrFrame)
 end;
 
 procedure TForm1.AddConstrCircleGreenClick(Sender: TObject);

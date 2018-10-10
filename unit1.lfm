@@ -1,13 +1,13 @@
 object Form1: TForm1
-  Left = 532
+  Left = 70
   Height = 282
-  Top = 226
+  Top = 122
   Width = 394
   HorzScrollBar.Page = 217
   VertScrollBar.Page = 169
   AutoScroll = True
   Caption = 'Möbelrücken'
-  ClientHeight = 256
+  ClientHeight = 263
   ClientWidth = 394
   Menu = MainMenu1
   OnCloseQuery = FormCloseQuery
@@ -81,6 +81,10 @@ object Form1: TForm1
       object AddConstrCircleGreen: TMenuItem
         Caption = 'Konstruktionspunkt kreisförmig, &grün'
         OnClick = AddConstrCircleGreenClick
+      end
+      object AddConstrFrame: TMenuItem
+        Caption = 'Konstruktions&rahmen'
+        OnClick = AddConstrFrameClick
       end
     end
   end

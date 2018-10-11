@@ -24,7 +24,7 @@ bin/$(Target): bin
 bin:
 	mkdir bin
 
-lib/$(Target)/mofu, lib/$(Target)/mofu.exe: mofu.lpi
+lib/$(Target)/mofu lib/$(Target)/mofu.exe: mofu.lpi 
 	lazbuild -r --os=$(Target_OS) --cpu=$(Target_CPU) mofu.lpi
 
 bin/$(Target)/mofu/mofu.ico: mofu.ico

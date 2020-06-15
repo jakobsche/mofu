@@ -1,3 +1,4 @@
 backup
 .svn
 lib
+.DS_Store
